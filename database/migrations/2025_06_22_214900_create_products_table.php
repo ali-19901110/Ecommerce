@@ -17,13 +17,13 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->longText('description')->nullable();
             $table->text('short_description')->nullable();
-            $table->string('sku',100);
-            $table->decimal('price',10,2);
-            $table->decimal('sale_price',10,2)->nullable();
-            $table->decimal('cost_price',10,2)->nullable();
+            $table->string('sku', 100);
+            $table->decimal('price', 10, 2);
+            $table->decimal('sale_price', 10, 2)->nullable();
+            $table->decimal('cost_price', 10, 2)->nullable();
             $table->integer('stock_quantity')->default(0);
             $table->integer('min_quantity')->default(1);
-            $table->decimal('weight',8,2)->nullable();
+            $table->decimal('weight', 8, 2)->nullable();
             $table->string('dimensions')->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);
@@ -33,14 +33,14 @@ return new class extends Migration
             $table->json('gallery')->nullable();
             $table->string('meta_title')->nullable();
             $table->text('meta_description')->nullable();
-            $table->decimal('rating_average',2,1)->default(0.0);
+            $table->decimal('rating_average', 2, 1)->default(0.0);
             $table->integer('rating_count')->default(0);
             $table->foreignId('category_id')->constrained();
-              $table->foreignId('subcategory_id')->constrained();
+            $table->foreignId('subcategory_id')->constrained();
             $table->timestamps();
         });
     }
-
+    // 2025_06_22_196413
     /**
      * Reverse the migrations.
      */
