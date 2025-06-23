@@ -40,7 +40,6 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-    // 2025_06_22_196413
     /**
      * Reverse the migrations.
      */
