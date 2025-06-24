@@ -2,60 +2,69 @@
 
 @section('content')
 
-    <div class="card radius-10">
-        <div class="card-body">
-            <div class="d-flex align-items-center">
-                <div>
-                    <h5 class="mb-0">Orders Summary</h5>
-                </div>
-                <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>
-                </div>
+<div class="card radius-10">
+    <div class="card-body">
+        <div class="d-flex align-items-center">
+            <div>
+                <h5 class="mb-0">Categories Summary</h5>
             </div>
-            <hr>
-            <div class="table-responsive">
-                <table class="table align-middle mb-0">
-                    <thead class="table-light">
-                        <tr>
-                            <th>Order id</th>
-                            <th>Product</th>
-                            <th>Customer</th>
-                            <th>Date</th>
-                            <th>Price</th>
-                            <th>Status</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>#897656</td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="recent-product-img">
-                                        <img src="assets/images/icons/chair.png" alt="">
-                                    </div>
-                                    <div class="ms-2">
-                                        <h6 class="mb-1 font-14">Light Blue Chair</h6>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Brooklyn Zeo</td>
-                            <td>12 Jul 2020</td>
-                            <td>$64.00</td>
-                            <td>
-                                <div class="badge rounded-pill bg-light-info text-info w-100">In Progress</div>
-                            </td>
-                            <td>
-                                <div class="d-flex order-actions"> <a href="javascript:;" class=""><i
-                                            class="bx bx-cog"></i></a>
-                                    <a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <div class="font-22 ms-auto"><i class="bx bx-dots-horizontal-rounded"></i>
             </div>
         </div>
+        <hr>
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Category id</th>
+                        <th>Category</th>
+                        <th>Slug</th>
+                        <th>Date</th>
+                        {{-- <th>Price</th>
+                        <th>Status</th> --}}
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($categoriesFromDB as $category)
+
+                    <tr>
+                        <td>{{$category->id}}</td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="recent-product-img">
+                                    <img src="{{asset('backend/assets/images/icons/chair.png')}}" alt="">
+                                </div>
+                                <div class="ms-2">
+                                    <h6 class="mb-1 font-14">{{$category->name}}</h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{$category->slug}}</td>
+                        <td>{{$category->created_at->format('d M Y')}}</td>
+                        <td>
+                            <div class="d-flex order-actions">
+                                <form method="POST" action="{{route('categories.destroy',$category->id)}}">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn bg-light" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Delete"><i class="bx bx-trash"></i></button>
+                                </form>
+                                {{-- <form action="">
+                                    <button class=""><i class="bx bx-trash" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" title="Delete"></i></button>
+                                </form> --}}
+                                <a href="{{route('categories.edit', $category->id)}}" class="ms-4"><i class="bx bx-cog"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
 
 
 @endsection
