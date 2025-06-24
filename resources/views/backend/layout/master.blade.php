@@ -8,7 +8,7 @@
 	<!--favicon-->
 	<link rel="icon" href="{{asset('backend/assets/images/favicon-32x32.png')}}" type="image/png" />
 	<!--plugins-->
-	<link href="{{asset('backend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>
+	<link href="{{asset('backend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
 	<link href="{{asset('backend/assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
 	<link href="{{asset('backend/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
 	<link href="{{asset('backend/assets/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
@@ -30,16 +30,17 @@
 	<!--wrapper-->
 	<div class="wrapper">
 		<!--sidebar wrapper -->
-        @include('backend.layout.body.sidebar')
+		@include('backend.layout.body.sidebar')
 		<!--end sidebar wrapper -->
 		<!--start header -->
-        @include('backend.layout.body.navbar')
+		@include('backend.layout.body.navbar')
 		<!--end header -->
 		<!--start page wrapper -->
 		<div class="page-wrapper">
-            @yield('content')
-			{{-- <div class="page-content">
-					  <div class="card radius-10">
+			<div class="page-content">
+				@yield('content')
+				{{-- <div class="page-content">
+					<div class="card radius-10">
 						<div class="card-body">
 							<div class="d-flex align-items-center">
 								<div>
@@ -79,11 +80,14 @@
 											<td>12 Jul 2020</td>
 											<td>$64.00</td>
 											<td>
-												<div class="badge rounded-pill bg-light-info text-info w-100">In Progress</div>
+												<div class="badge rounded-pill bg-light-info text-info w-100">In
+													Progress</div>
 											</td>
 											<td>
-												<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
-													<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+												<div class="d-flex order-actions"> <a href="javascript:;" class=""><i
+															class="bx bx-cog"></i></a>
+													<a href="javascript:;" class="ms-4"><i
+															class="bx bx-down-arrow-alt"></i></a>
 												</div>
 											</td>
 										</tr>
@@ -103,11 +107,14 @@
 											<td>14 Jul 2020</td>
 											<td>$45.00</td>
 											<td>
-												<div class="badge rounded-pill bg-light-success text-success w-100">Completed</div>
+												<div class="badge rounded-pill bg-light-success text-success w-100">
+													Completed</div>
 											</td>
 											<td>
-												<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
-													<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+												<div class="d-flex order-actions"> <a href="javascript:;" class=""><i
+															class="bx bx-cog"></i></a>
+													<a href="javascript:;" class="ms-4"><i
+															class="bx bx-down-arrow-alt"></i></a>
 												</div>
 											</td>
 										</tr>
@@ -127,11 +134,14 @@
 											<td>15 Jul 2020</td>
 											<td>$67.00</td>
 											<td>
-												<div class="badge rounded-pill bg-light-danger text-danger w-100">Cancelled</div>
+												<div class="badge rounded-pill bg-light-danger text-danger w-100">
+													Cancelled</div>
 											</td>
 											<td>
-												<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
-													<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+												<div class="d-flex order-actions"> <a href="javascript:;" class=""><i
+															class="bx bx-cog"></i></a>
+													<a href="javascript:;" class="ms-4"><i
+															class="bx bx-down-arrow-alt"></i></a>
 												</div>
 											</td>
 										</tr>
@@ -151,11 +161,14 @@
 											<td>18 Jul 2020</td>
 											<td>$87.00</td>
 											<td>
-												<div class="badge rounded-pill bg-light-success text-success w-100">Completed</div>
+												<div class="badge rounded-pill bg-light-success text-success w-100">
+													Completed</div>
 											</td>
 											<td>
-												<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
-													<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+												<div class="d-flex order-actions"> <a href="javascript:;" class=""><i
+															class="bx bx-cog"></i></a>
+													<a href="javascript:;" class="ms-4"><i
+															class="bx bx-down-arrow-alt"></i></a>
 												</div>
 											</td>
 										</tr>
@@ -175,11 +188,14 @@
 											<td>20 Jul 2020</td>
 											<td>$75.00</td>
 											<td>
-												<div class="badge rounded-pill bg-light-info text-info w-100">In Progress</div>
+												<div class="badge rounded-pill bg-light-info text-info w-100">In
+													Progress</div>
 											</td>
 											<td>
-												<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
-													<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+												<div class="d-flex order-actions"> <a href="javascript:;" class=""><i
+															class="bx bx-cog"></i></a>
+													<a href="javascript:;" class="ms-4"><i
+															class="bx bx-down-arrow-alt"></i></a>
 												</div>
 											</td>
 										</tr>
@@ -199,11 +215,14 @@
 											<td>22 Jul 2020</td>
 											<td>$80.00</td>
 											<td>
-												<div class="badge rounded-pill bg-light-danger text-danger w-100">Cancelled</div>
+												<div class="badge rounded-pill bg-light-danger text-danger w-100">
+													Cancelled</div>
 											</td>
 											<td>
-												<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
-													<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+												<div class="d-flex order-actions"> <a href="javascript:;" class=""><i
+															class="bx bx-cog"></i></a>
+													<a href="javascript:;" class="ms-4"><i
+															class="bx bx-down-arrow-alt"></i></a>
 												</div>
 											</td>
 										</tr>
@@ -223,11 +242,14 @@
 											<td>28 Jul 2020</td>
 											<td>$96.00</td>
 											<td>
-												<div class="badge rounded-pill bg-light-success text-success w-100">Completed</div>
+												<div class="badge rounded-pill bg-light-success text-success w-100">
+													Completed</div>
 											</td>
 											<td>
-												<div class="d-flex order-actions">	<a href="javascript:;" class=""><i class="bx bx-cog"></i></a>
-													<a href="javascript:;" class="ms-4"><i class="bx bx-down-arrow-alt"></i></a>
+												<div class="d-flex order-actions"> <a href="javascript:;" class=""><i
+															class="bx bx-cog"></i></a>
+													<a href="javascript:;" class="ms-4"><i
+															class="bx bx-down-arrow-alt"></i></a>
 												</div>
 											</td>
 										</tr>
@@ -237,17 +259,17 @@
 						</div>
 					</div>
 
-			</div> --}}
+				</div> --}}
+			</div>
 		</div>
 		<!--end page wrapper -->
 		<!--start overlay-->
 		<div class="overlay toggle-icon"></div>
 		<!--end overlay-->
-		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i
+				class='bx bxs-up-arrow-alt'></i></a>
 		<!--End Back To Top Button-->
-		<footer class="page-footer">
-			<p class="mb-0">Copyright © 2021. All right reserved.</p>
-		</footer>
+		@include('backend.layout.body.footer')
 	</div>
 	<!--end wrapper-->
 	<!--start switcher-->
@@ -259,9 +281,9 @@
 				<h5 class="mb-0 text-uppercase">Theme Customizer</h5>
 				<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
 			</div>
-			<hr/>
+			<hr />
 			<h6 class="mb-0">Theme Styles</h6>
-			<hr/>
+			<hr />
 			<div class="d-flex align-items-center justify-content-between">
 				<div class="form-check">
 					<input class="form-check-input" type="radio" name="flexRadioDefault" id="lightmode" checked>
@@ -276,14 +298,14 @@
 					<label class="form-check-label" for="semidark">Semi Dark</label>
 				</div>
 			</div>
-			<hr/>
+			<hr />
 			<div class="form-check">
 				<input class="form-check-input" type="radio" id="minimaltheme" name="flexRadioDefault">
 				<label class="form-check-label" for="minimaltheme">Minimal Theme</label>
 			</div>
-			<hr/>
+			<hr />
 			<h6 class="mb-0">Header Colors</h6>
-			<hr/>
+			<hr />
 			<div class="header-colors-indigators">
 				<div class="row row-cols-auto g-3">
 					<div class="col">
@@ -313,9 +335,9 @@
 				</div>
 			</div>
 
-			<hr/>
+			<hr />
 			<h6 class="mb-0">Sidebar Backgrounds</h6>
-			<hr/>
+			<hr />
 			<div class="header-colors-indigators">
 				<div class="row row-cols-auto g-3">
 					<div class="col">
@@ -353,21 +375,21 @@
 	<!--plugins-->
 	<script src="{{asset('backend/assets/js/jquery.min.js')}}"></script>
 	<script src="{{asset('backend/assets/plugins/simplebar/js/simplebar.min.js')}}"></script>
-	<script src="asset('backend/assets/plugins/metismenu/js/metisMenu.min.js')"></script>
+	<script src="{{asset('backend/assets/plugins/metismenu/js/metisMenu.min.js')}}"></script>
 	<script src="{{asset('backend/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
 	<script src="{{asset('backend/assets/plugins/chartjs/js/Chart.min.js')}}"></script>
 	<script src="{{asset('backend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js')}}"></script>
-    <script src="{{asset('backend/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
+	<script src="{{asset('backend/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
 	<script src="{{asset('backend/assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js')}}"></script>
 	<script src="{{asset('backend/assets/plugins/sparkline-charts/jquery.sparkline.min.js')}}"></script>
 	<script src="{{asset('backend/assets/plugins/jquery-knob/excanvas.js')}}"></script>
 	<script src="{{asset('backend/assets/plugins/jquery-knob/jquery.knob.js')}}"></script>
-	  <script>
-		  $(function() {
+	<script>
+		$(function() {
 			  $(".knob").knob();
 		  });
-	  </script>
-	  <script src="{{asset('backend/assets/js/index.js')}}"></script>
+	</script>
+	<script src="{{asset('backend/assets/js/index.js')}}"></script>
 	<!--app JS-->
 	<script src="{{asset('backend/assets/js/app.js')}}"></script>
 </body>
