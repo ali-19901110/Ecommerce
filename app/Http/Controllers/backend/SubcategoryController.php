@@ -46,7 +46,7 @@ class SubcategoryController extends Controller
         // Insert to DB
         try {
             //dd('test');
-            $obj = Subcategory::create([
+             Subcategory::create([
                 'name' => $request->name,
                 'category_id' => $request->category_id,
                 'slug' => $request->slug,

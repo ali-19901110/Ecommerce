@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\CategoryController;
+use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\SubcategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Subcategory;
@@ -52,4 +53,12 @@ Route::get('/subcategories/create',[SubcategoryController::class, 'create'])->na
 Route::post('/subcategories', [SubcategoryController::class,'store'])->name('subcategories.store');
 Route::get('/subcategories/{subcategory}/edit', [SubcategoryController::class, 'edit'])->name('subcategories.edit');
 Route::put('/subcategories/{subcategory}', [SubcategoryController::class, 'update'])->name('subcategories.update');
-Route::delete('subcategories/{subcategory}', [SubcategoryController::class, 'destroy'])->name('subcategories.destroy');
+Route::delete('/subcategories/{subcategory}', [SubcategoryController::class, 'destroy'])->name('subcategories.destroy');
+
+//Routes of subcategory
+Route::get('/products', [ProductController::class,'index'])->name('products.index');
+Route::get('/products/create',[ProductController::class, 'create'])->name('products.create');
+Route::post('/products', [ProductController::class,'store'])->name('products.store');
+Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
+Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');

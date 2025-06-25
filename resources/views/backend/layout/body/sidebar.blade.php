@@ -40,7 +40,7 @@
                 <div class="menu-title">Product</div>
             </a>
             <ul>
-                <li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Create Product</a>
+                <li> <a href="{{route('products.create')}}"><i class="bx bx-right-arrow-alt"></i>Create Product</a>
                 </li>
             </ul>
         </li>
