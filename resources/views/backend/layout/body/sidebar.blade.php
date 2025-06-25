@@ -29,7 +29,7 @@
                 <div class="menu-title">SubCategory</div>
             </a>
             <ul>
-                <li> <a href="{index.html}"><i class="bx bx-right-arrow-alt"></i>create SubCategory</a>
+                <li> <a href="{{route('subcategories.create')}}"><i class="bx bx-right-arrow-alt"></i>create SubCategory</a>
                 </li>
             </ul>
         </li>
