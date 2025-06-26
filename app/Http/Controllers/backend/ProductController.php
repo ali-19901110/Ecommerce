@@ -75,7 +75,7 @@ class ProductController extends Controller
                 'sku' => $request->sku,
                 'is_active' => $request->is_active,
                 'is_featured' => $request->is_featured,
-                'manage_stock' => $request->has('manage_stock'),
+                'manage_stock' => $request->has('manage_stock')?? 0,
                 'stock_status' => $request->stock_status,
                 'sale_price' =>  $request->sale_price,
                 'cost_price' =>  $request->cost_price,
@@ -109,9 +109,37 @@ class ProductController extends Controller
          $allcategories = Category::with('products')->get();
         //dd($allcategories);
         $allsubcategories = Subcategory::with('products')->get();
-        return view('backend.pages.subcategory.edit', compact('allsubcategories', 'allcategories','allsubcategories'));
+        return view('backend.pages.products.edit', compact('allsubcategories', 'allcategories','allsubcategories'));
     }
-   
+    
+    // public function update(Request $request, Subcategory $subcategory)
+    // {
+    //     // dd($category);
+
+    //     // Validation Form
+    //     try {
+    //         $validated =  $request->validate([
+    //             'name' => 'required|string|max:255',
+    //             'category_id' => 'required|integer|exists:categories,id',
+    //             'slug' => (string)'required|string|max:255|unique:categories,slug,' . $subcategory->id,
+    //             'description' => 'nullable|string',
+    //             'image' => 'nullable|string',
+    //             'is_active' => 'required|boolean',
+    //             'sort_order' => 'integer|min:0',
+    //             'meta_title' => 'nullable|string|max:255',
+    //             'meta_description' => 'nullable|string|max:500'
+    //         ]);
+    //         $subcategory->update($validated);
+    //         return redirect()->route('subcategories.index')->with('success', 'Updated!');
+    //     } catch (ValidationException $e) {
+    //         throw $e;
+    //     } catch (Exception $e) {
+    //         //return redirect()->back()->with('error', 'Failed!');
+    //         return redirect()->back()
+    //             ->withInput()
+    //             ->with('error', 'Something went wrong while updating the category.');
+    //     }
+    // }
 
      public function destroy(Product $product){
         $product->delete();

@@ -34,6 +34,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('/admin', function(){
+    return view('admin');
+})->middleware(['auth', 'role:user']);
+
 Route::get('/master', function(){
     return view('backend.layout.master');
 });
@@ -62,3 +66,12 @@ Route::post('/products', [ProductController::class,'store'])->name('products.sto
 Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
 Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+
+// Route::get('/test', function(){
+//     return view('frontend.layouts.master');
+// });
+
+Route::get('/test', function () {
+    return view('frontend.layouts.master');
+});
