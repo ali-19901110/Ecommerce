@@ -109,7 +109,7 @@ class ProductController extends Controller
          $allcategories = Category::with('products')->get();
         //dd($allcategories);
         $allsubcategories = Subcategory::with('products')->get();
-        return view('backend.pages.products.edit', compact('allsubcategories', 'allcategories','allsubcategories'));
+        return view('backend.pages.product.edit', compact('allsubcategories', 'allcategories','product'));
     }
     
     // public function update(Request $request, Subcategory $subcategory)

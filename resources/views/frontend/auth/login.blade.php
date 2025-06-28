@@ -1,6 +1,6 @@
 ﻿@extends('frontend.layouts.master')
 @section('main')
-<p>this is login page</p>
+{{-- <p>this is login page</p> --}}
 <div class="page-header breadcrumb-wrap">
     <div class="container">
         <div class="breadcrumb">

@@ -3,7 +3,10 @@
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\SubcategoryController;
+use App\Http\Controllers\frontend\CategotyFrontendController;
+use App\Http\Controllers\frontend\ProductFrontendController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Support\Facades\Route;
 
@@ -44,7 +47,7 @@ Route::get('/master', function () {
 
 
 //Routes of category
-Route::prefix('admine')->group(function () {
+Route::prefix('admin')->group(function () {
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
@@ -82,16 +85,23 @@ Route::prefix('admine')->group(function () {
 
 
 //frontend routes
-Route::get('/index', function () {
-    return view('frontend.pages.index');
+Route::prefix('frontend')->group(function(){
+    Route::get('/index',[CategotyFrontendController::class, 'index']);
+    Route::get('/allproductinsubcategory/{id}', [ProductFrontendController::class, 'singleCategory'])->name('single.categories');
 });
 
 Route::get('/reg', function () {
-    return view('frontend.pages.register');
+    return view('frontend.auth.register');
 });
 Route::get('/log', function () {
-    return view('frontend.pages.login');
+    return view('frontend.auth.login');
 });
 Route::get('/res', function () {
-    return view('frontend.pages.reset');
+    return view('frontend.auth.reset');
 });
+
+
+
+
+
+
