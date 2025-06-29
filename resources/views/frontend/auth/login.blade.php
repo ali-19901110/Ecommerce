@@ -49,7 +49,13 @@
                                                         me</span></label>
                                             </div>
                                         </div>
-                                        <a class="text-muted" href="#">Forgot password?</a>
+                                        @if (Route::has('password.request'))
+                                        <a class="text-muted" href="{{ route('password.request') }}">Forgot
+                                            password?</a>
+                                        @endif
+                                        <x-primary-button class="ms-3">
+                                            {{ __('Log in') }}
+                                        </x-primary-button>
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-heading btn-block hover-up"

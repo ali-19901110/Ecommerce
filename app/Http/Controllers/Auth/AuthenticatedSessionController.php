@@ -29,7 +29,15 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        // return redirect()->intended(RouteServiceProvider::HOME);
+        // return redirect('frontend/index');
+        //[changing] checking if user or admin by laratrust
+        
+        if (auth()->user()->hasRole('admin')) {
+            return redirect('/admin/categories');
+        } else {
+            return redirect('/');
+        }
     }
 
     /**
@@ -43,6 +51,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
+        //[changing] redirecting to index page
         return redirect('/');
     }
 }

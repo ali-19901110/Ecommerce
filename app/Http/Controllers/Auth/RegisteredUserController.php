@@ -41,11 +41,20 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
+        
+        // [changing] Adding roule
+        $user->attachRole('user');
         event(new Registered($user));
-
+        
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        // return redirect(RouteServiceProvider::HOME);
+        //[changing] checking if user or admin by laratrust
+        
+        if (auth()->user()->hasRole('admin')) {
+            return redirect('/admin/categories');
+        } else {
+            return redirect('/');
+        }
     }
 }

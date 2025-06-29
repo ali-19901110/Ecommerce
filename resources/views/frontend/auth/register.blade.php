@@ -1,7 +1,6 @@
 ﻿
 @extends('frontend.layouts.master')
    @section('main')
-    <p>This is regester page</p>
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
@@ -22,20 +21,25 @@
                                             <h1 class="mb-5">Create an Account</h1>
                                             <p class="mb-30">Already have an account? <a href="page-login.html">Login</a></p>
                                         </div>
-                                        <form method="post">
+                                        <form method="POST" action="{{ route('register') }}">
+                                            @csrf
                                             <div class="form-group">
-                                                <input type="text" required="" name="username" placeholder="Username" />
+                                                <input type="text" required class="block mt-1 w-full" name="name" value="{{old('name')}}"placeholder="Username" autofocus autocomplete="name"/>
+                                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" required="" name="email" placeholder="Email" />
+                                                <input type="email" required  class="block mt-1 w-full" name="email" value="{{old('email')}}" placeholder="Email" autocomplete="username"/>
+                                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                             </div>
                                             <div class="form-group">
-                                                <input required="" type="password" name="password" placeholder="Password" />
+                                                <input class="block mt-1 w-full" type="password" name="password" placeholder="Password" required autocomplete="new-password"/>
+                                                  <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                             </div>
                                             <div class="form-group">
-                                                <input required="" type="password" name="password" placeholder="Confirm password" />
+                                                <input required class="block mt-1 w-full" type="password" name="password_confirmation" placeholder="Confirm password" autocomplete="new-password" />
+                                                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                                             </div>
-                                            <div class="login_footer form-group">
+                                            {{-- <div class="login_footer form-group">
                                                 <div class="chek-form">
                                                     <input type="text" required="" name="email" placeholder="Security code *" />
                                                 </div>
@@ -45,7 +49,7 @@
                                                     <b class="text-sale">7</b>
                                                     <b class="text-best">5</b>
                                                 </span>
-                                            </div>
+                                            </div> --}}
                                             <div class="payment_option mb-50">
                                                 <div class="custome-radio">
                                                     <input class="form-check-input" required="" type="radio" name="payment_option" id="exampleRadios3" checked="" />

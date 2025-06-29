@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -37,9 +37,9 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-Route::get('/admin', function () {
-    return view('admin');
-})->middleware(['auth', 'role:user']);
+// Route::get('/admin', function () {
+//     return view('admin');
+// })->middleware(['auth', 'role:user']);
 
 Route::get('/master', function () {
     return view('backend.layout.master');
@@ -86,16 +86,18 @@ Route::prefix('admin')->group(function () {
 
 //frontend routes
 Route::prefix('frontend')->group(function(){
-    Route::get('/index',[CategotyFrontendController::class, 'index']);
+    // Route::get('/index',[CategotyFrontendController::class, 'index']);
     Route::get('/allproductinsubcategory/{id}', [ProductFrontendController::class, 'singleCategory'])->name('single.categories');
 });
 
+Route::get('/',[CategotyFrontendController::class, 'index']);
+
 Route::get('/reg', function () {
     return view('frontend.auth.register');
-});
+})->name('frontend.regester');
 Route::get('/log', function () {
     return view('frontend.auth.login');
-});
+})->name('frontend.login');
 Route::get('/res', function () {
     return view('frontend.auth.reset');
 });

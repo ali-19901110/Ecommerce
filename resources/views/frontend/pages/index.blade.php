@@ -144,7 +144,7 @@ $subcategries = App\Models\SubCategory::all();
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                 <div class="row product-grid-4">
-                    @foreach ($subProducts as $subproduct )
+                    @foreach ($subProducts as $product )
                      <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
                             <div class="product-img-action-wrap">
@@ -170,10 +170,9 @@ $subcategries = App\Models\SubCategory::all();
                             </div>
                             <div class="product-content-wrap">
                                 <div class="product-category">
-                                    <a href="shop-grid-right.html">Snack</a>
+                                    <a href="shop-grid-right.html">{{$product->name}}</a>
                                 </div>
-                                <h2><a href="shop-product-right.html">Seeds of Change Organic Quinoa, Brown, &
-                                        Red Rice</a></h2>
+                                <h2><a href="shop-product-right.html">{{$product->description}}</a></h2>
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
                                         <div class="product-rating" style="width: 90%"></div>
@@ -186,7 +185,7 @@ $subcategries = App\Models\SubCategory::all();
                                 </div>
                                 <div class="product-card-bottom">
                                     <div class="product-price">
-                                        <span>$28.85</span>
+                                        <span>${{$product->price}}</span>
                                         <span class="old-price">$32.8</span>
                                     </div>
                                     <div class="add-cart">
