@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\SubcategoryController;
+use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\CategotyFrontendController;
 use App\Http\Controllers\frontend\ProductFrontendController;
 use App\Http\Controllers\ProfileController;
@@ -101,6 +102,8 @@ Route::get('/log', function () {
 Route::get('/res', function () {
     return view('frontend.auth.reset');
 });
+
+Route::get('/frontend/addtocart/{id}',[CartController::class, 'addToCart'])->name('frontend.add.to.cart');
 
 
 
