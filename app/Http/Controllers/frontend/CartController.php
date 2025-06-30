@@ -31,4 +31,8 @@ class CartController extends Controller
         // return view('frontend.pages.shop-cart');
         return redirect()->back();
     }
+
+    public function cart(){
+        return view('frontend.pages.shop-cart');
+    }
 }

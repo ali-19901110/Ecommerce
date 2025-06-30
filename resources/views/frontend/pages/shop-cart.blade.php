@@ -40,17 +40,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if(session('cart'))
+                        @php
+                        $total = 0;
+                        @endphp
+                        @foreach (session('cart') as $key => $details)
+                        @php
+                        $total = $total + ($details['price'] * $details['quantity'])
+                        @endphp
                         <tr class="pt-30">
                             <td class="custome-checkbox pl-30">
                                 <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1"
                                     value="">
                                 <label class="form-check-label" for="exampleCheckbox1"></label>
                             </td>
-                            <td class="image product-thumbnail pt-40"><img src="assets/imgs/shop/product-1-1.jpg"
-                                    alt="#"></td>
+                            <td class="image product-thumbnail pt-40"><img
+                                    src="{{asset('frontend/assets/imgs/shop/product-1-1.jpg')}}" alt="#"></td>
                             <td class="product-des product-name">
                                 <h6 class="mb-5"><a class="product-name mb-10 text-heading"
-                                        href="shop-product-right.html">Field Roast Chao Cheese Creamy Original</a></h6>
+                                        href="shop-product-right.html">{{$details['name']}}</a></h6>
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
                                         <div class="product-rating" style="width:90%">
@@ -60,97 +68,25 @@
                                 </div>
                             </td>
                             <td class="price" data-title="Price">
-                                <h4 class="text-body">$2.51 </h4>
+                                <h4 class="text-body">${{$details['price']}} </h4>
                             </td>
                             <td class="text-center detail-info" data-title="Stock">
                                 <div class="detail-extralink mr-15">
                                     <div class="detail-qty border radius">
                                         <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                        <input type="text" name="quantity" class="qty-val" value="1" min="1">
+                                        <input type="text" name="quantity" class="qty-val" value="{{$details['quantity']}}" min="1">
                                         <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
                                 </div>
                             </td>
                             <td class="price" data-title="Price">
-                                <h4 class="text-brand">$2.51 </h4>
+                                <h4 class="text-brand">${{$details['price'] * $details['quantity']}} </h4>
                             </td>
                             <td class="action text-center" data-title="Remove"><a href="#" class="text-body"><i
                                         class="fi-rs-trash"></i></a></td>
                         </tr>
-                        <tr>
-                            <td class="custome-checkbox pl-30">
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox2"
-                                    value="">
-                                <label class="form-check-label" for="exampleCheckbox2"></label>
-                            </td>
-                            <td class="image product-thumbnail"><img src="assets/imgs/shop/product-2-1.jpg" alt="#">
-                            </td>
-                            <td class="product-des product-name">
-                                <h6 class="mb-5"><a class="product-name mb-10 text-heading"
-                                        href="shop-product-right.html">Blue Diamond Almonds Lightly Salted</a></h6>
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width:90%">
-                                        </div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </td>
-                            <td class="price" data-title="Price">
-                                <h4 class="text-body">$3.2 </h4>
-                            </td>
-                            <td class="text-center detail-info" data-title="Stock">
-                                <div class="detail-extralink mr-15">
-                                    <div class="detail-qty border radius">
-                                        <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                        <input type="text" name="quantity" class="qty-val" value="1" min="1">
-                                        <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="price" data-title="Price">
-                                <h4 class="text-brand">$3.2 </h4>
-                            </td>
-                            <td class="action text-center" data-title="Remove"><a href="#" class="text-body"><i
-                                        class="fi-rs-trash"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td class="custome-checkbox pl-30">
-                                <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox3"
-                                    value="">
-                                <label class="form-check-label" for="exampleCheckbox3"></label>
-                            </td>
-                            <td class="image product-thumbnail"><img src="assets/imgs/shop/product-3-1.jpg" alt="#">
-                            </td>
-                            <td class="product-des product-name">
-                                <h6 class="mb-5"><a class="product-name mb-10 text-heading"
-                                        href="shop-product-right.html">Fresh Organic Mustard Leaves Bell Pepper</a></h6>
-                                <div class="product-rate-cover">
-                                    <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width:90%">
-                                        </div>
-                                    </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
-                                </div>
-                            </td>
-                            <td class="price" data-title="Price">
-                                <h4 class="text-body">$2.43 </h4>
-                            </td>
-                            <td class="text-center detail-info" data-title="Stock">
-                                <div class="detail-extralink mr-15">
-                                    <div class="detail-qty border radius">
-                                        <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                        <input type="text" name="quantity" class="qty-val" value="1" min="1">
-                                        <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="price" data-title="Price">
-                                <h4 class="text-brand">$2.43 </h4>
-                            </td>
-                            <td class="action text-center" data-title="Remove"><a href="#" class="text-body"><i
-                                        class="fi-rs-trash"></i></a></td>
-                        </tr>
+                         @endforeach
+                      @endif
                     </tbody>
                 </table>
             </div>
@@ -186,7 +122,7 @@
                                             <h6 class="text-muted">Subtotal</h6>
                                         </td>
                                         <td class="cart_total_amount">
-                                            <h4 class="text-brand text-end">$12.31</h4>
+                                            <h4 class="text-brand text-end">{{$total}}</h4>
                                         </td>
                                     </tr>
                                     <tr>
@@ -199,14 +135,16 @@
                                             <h6 class="text-muted">Shipping</h6>
                                         </td>
                                         <td class="cart_total_amount">
-                                            <h5 class="text-heading text-end">Free</h4< /td>
+                                            <h5 class="text-heading text-end">Free</h4>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="cart_total_label">
                                             <h6 class="text-muted">Estimate for</h6>
                                         </td>
                                         <td class="cart_total_amount">
-                                            <h5 class="text-heading text-end">United Kingdom</h4< /td>
+                                            <h5 class="text-heading text-end">United Kingdom</h4>
+                                                </td>
                                     </tr>
                                     <tr>
                                         <td scope="col" colspan="2">
@@ -218,7 +156,7 @@
                                             <h6 class="text-muted">Total</h6>
                                         </td>
                                         <td class="cart_total_amount">
-                                            <h4 class="text-brand text-end">$12.31</h4>
+                                            <h4 class="text-brand text-end">${{$total}}</h4>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -236,3 +174,4 @@
     </div>
 </div>
 @endsection
+

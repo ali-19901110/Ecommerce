@@ -104,6 +104,7 @@ Route::get('/res', function () {
 });
 
 Route::get('/frontend/addtocart/{id}',[CartController::class, 'addToCart'])->name('frontend.add.to.cart');
+Route::get('/cart',[CartController::class, 'cart'])->name('cart');
 
 
 
