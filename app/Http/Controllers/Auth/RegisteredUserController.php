@@ -43,7 +43,8 @@ class RegisteredUserController extends Controller
         ]);
         
         // [changing] Adding roule
-        $user->attachRole('user');
+        
+        $user->addRole('user');
         event(new Registered($user));
         
         Auth::login($user);

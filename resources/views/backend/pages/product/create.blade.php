@@ -33,7 +33,7 @@
                         <label for="inputState" class="form-label">Subategory</label>
                         <select id="inputState" name='subcategory_id' class="form-select">
                             @foreach ($allsubcategories as $subcategory)
-                            <option value="{{$subcategory->id}}">{{$subcategory->name}}</option>
+                            <option value="{{$subcategory->id}}" {{ old('subcategory_id') == $subcategory->id ? 'selected' : '' }}>{{$subcategory->name}}</option>
                             @endforeach
                         </select>
                     </div>

@@ -47,7 +47,7 @@ Route::get('/master', function () {
 
 
 //Routes of category
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
@@ -90,7 +90,7 @@ Route::prefix('frontend')->group(function(){
     Route::get('/allproductinsubcategory/{id}', [ProductFrontendController::class, 'singleCategory'])->name('single.categories');
 });
 
-Route::get('/',[CategotyFrontendController::class, 'index']);
+Route::get('/',[CategotyFrontendController::class, 'index'])->name('home');
 
 Route::get('/reg', function () {
     return view('frontend.auth.register');

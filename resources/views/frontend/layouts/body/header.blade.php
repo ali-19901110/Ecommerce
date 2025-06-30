@@ -61,7 +61,7 @@
         <div class="container">
             <div class="header-wrap">
                 <div class="logo logo-width-1">
-                    <a href="index.html"><img src="{{ asset('frontend/assets/imgs/theme/logo.svg') }}" alt="logo" /></a>
+                    <a href="{{route('home')}}"><img src="{{ asset('frontend/assets/imgs/theme/logo.svg') }}" alt="logo" /></a>
                 </div>
                 <div class="header-right">
                     <div class="search-style-2">
@@ -322,13 +322,13 @@
                             <ul>
 
                                 <li>
-                                    <a class="active" href="index.html">Home </a>
+                                    <a class="active" href="{{route('home')}}">Home </a>
 
                                 </li>
                                 <li>
                                     <a href="page-about.html">About</a>
                                 </li>
-                                <li>
+                                {{-- <li>
                                     <a href="shop-grid-right.html">Shop <i class="fi-rs-angle-down"></i></a>
                                     <ul class="sub-menu">
                                         <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
@@ -457,7 +457,7 @@
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
+                                </li> --}}
                                 <li>
                                     <a href="#">Pages <i class="fi-rs-angle-down"></i></a>
                                     <ul class="sub-menu">
@@ -584,9 +584,9 @@
                 <nav>
                     <ul class="mobile-menu font-heading">
                         <li class="menu-item-has-children">
-                            <a href="index.html">Home</a>
+                            <a href="{{route('home')}}">Home</a>
 
-                        </li>
+                        {{-- </li>
                         <li class="menu-item-has-children">
                             <a href="shop-grid-right.html">shop</a>
                             <ul class="dropdown">
@@ -671,7 +671,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="menu-item-has-children">
                             <a href="#">Pages</a>
                             <ul class="dropdown">
