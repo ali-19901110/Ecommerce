@@ -63,7 +63,6 @@
                         $subtotal = $details['price'] * $details['quantity'];
                         $total += $subtotal;
                         @endphp
-                        @endphp
                         <tr class="pt-30">
                             <td class="custome-checkbox pl-30">
                                 <input class="form-check-input" type="checkbox" name="checkbox" id="exampleCheckbox1"
@@ -113,9 +112,13 @@
                                 {{-- <a href="#" class="text-body">
                                     <i class="fi-rs-trash"></i>
                                 </a> --}}
-                                   <button href="#" class="text-body">
+                                <form action="{{route('cart.remove',$details['id'])}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                   <button type="submit" style="border:none; background:none;" class="text-body">
                                     <i class="fi-rs-trash"></i>
                                 </button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach
