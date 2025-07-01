@@ -112,3 +112,6 @@ Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remov
 
 
 
+Route::get('/checkout', function(){
+return view('frontend.pages.shop-checkout');
+});
