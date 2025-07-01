@@ -18,6 +18,7 @@ class CartController extends Controller
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
+                'id' => $product->id,
                 "name" => $product->name,
                 "quantity" => 1,
                 "price"  => $product->price,
@@ -32,7 +33,20 @@ class CartController extends Controller
         return redirect()->back();
     }
 
-    public function cart(){
+    public function cart()
+    {
         return view('frontend.pages.shop-cart');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] = max((int) $request->quantity, 1);
+            session()->put('cart', $cart);
+        }
+
+        return response()->json(['success' => true, 'cart' => $cart]);
     }
 }

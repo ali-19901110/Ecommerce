@@ -1,4 +1,18 @@
 ﻿@extends('frontend.layouts.master')
+@section('style')
+<style>
+    .no-arrows::-webkit-inner-spin-button,
+    .no-arrows::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    .no-arrows {
+        -moz-appearance: textfield;
+    }
+</style>
+
+@endsection
 @section('main')
 
 
@@ -40,13 +54,15 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if(session('cart'))
                         @php
                         $total = 0;
                         @endphp
+                        @if(session('cart'))
                         @foreach (session('cart') as $key => $details)
                         @php
-                        $total = $total + ($details['price'] * $details['quantity'])
+                        $subtotal = $details['price'] * $details['quantity'];
+                        $total += $subtotal;
+                        @endphp
                         @endphp
                         <tr class="pt-30">
                             <td class="custome-checkbox pl-30">
@@ -73,20 +89,37 @@
                             <td class="text-center detail-info" data-title="Stock">
                                 <div class="detail-extralink mr-15">
                                     <div class="detail-qty border radius">
-                                        <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                        <input type="text" name="quantity" class="qty-val" value="{{$details['quantity']}}" min="1">
-                                        <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                        {{-- <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                        --}}
+
+                                        <a href="#" class="qty-down" data-id="{{ $details['id'] }}"
+                                            data-quantity="{{ max($details['quantity'] - 1, 1) }}">
+                                            <i class="fi-rs-angle-small-down"></i>
+                                        </a>
+                                        <input type="number" name="quantity" class="qty-val quant no-arrows"
+                                            value="{{$details['quantity']}}" min="1">
+                                        {{-- <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a> --}}
+                                        <a href="#" class="qty-up" data-id="{{ $details['id'] }}"
+                                            data-quantity="{{ $details['quantity'] + 1 }}">
+                                            <i class="fi-rs-angle-small-up"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </td>
                             <td class="price" data-title="Price">
                                 <h4 class="text-brand">${{$details['price'] * $details['quantity']}} </h4>
                             </td>
-                            <td class="action text-center" data-title="Remove"><a href="#" class="text-body"><i
-                                        class="fi-rs-trash"></i></a></td>
+                            <td class="action text-center" data-title="Remove">
+                                {{-- <a href="#" class="text-body">
+                                    <i class="fi-rs-trash"></i>
+                                </a> --}}
+                                   <button href="#" class="text-body">
+                                    <i class="fi-rs-trash"></i>
+                                </button>
+                            </td>
                         </tr>
-                         @endforeach
-                      @endif
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -122,7 +155,7 @@
                                             <h6 class="text-muted">Subtotal</h6>
                                         </td>
                                         <td class="cart_total_amount">
-                                            <h4 class="text-brand text-end">{{$total}}</h4>
+                                            <h4 class="text-brand text-end">{{$total }}</h4>
                                         </td>
                                     </tr>
                                     <tr>
@@ -144,7 +177,7 @@
                                         </td>
                                         <td class="cart_total_amount">
                                             <h5 class="text-heading text-end">United Kingdom</h4>
-                                                </td>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td scope="col" colspan="2">
@@ -174,4 +207,33 @@
     </div>
 </div>
 @endsection
+@section('script')
+<script>
+    $(document).ready(function() {
+        document.querySelectorAll('.qty-down, .qty-up').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
 
+                const productId = this.dataset.id;
+                const quantity = this.dataset.quantity;
+
+                fetch(`{{ url('/cart') }}/${productId}`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Content-Type': 'application/json',
+                        'X-HTTP-Method-Override': 'PUT'
+                    },
+                    body: JSON.stringify({ quantity: quantity })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Optional: update cart UI dynamically
+                    location.reload(); // or update total/qty live
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+        });
+</script>
+@endsection
