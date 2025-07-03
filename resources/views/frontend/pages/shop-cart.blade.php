@@ -30,7 +30,7 @@
         <div class="col-lg-8 mb-40">
             <h1 class="heading-2 mb-10">Your Cart</h1>
             <div class="d-flex justify-content-between">
-                <h6 class="text-body">There are <span class="text-brand">3</span> products in your cart</h6>
+                <h6 class="text-body">There are <span class="text-brand">{{count(session('cart', []));}}</span> products in your cart</h6>
                 <h6 class="text-body"><a href="#" class="text-muted"><i class="fi-rs-trash mr-5"></i>Clear Cart</a></h6>
             </div>
         </div>
@@ -198,7 +198,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <a href="#" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></a>
+                        <a href="{{route('cart.checkout')}}" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></a>
                     </div>
                 </div>
 

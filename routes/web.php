@@ -78,20 +78,14 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
 
 
 
-
-
-// Route::get('/test', function(){
-//     return view('frontend.layouts.master');
-// });
-
-
 //frontend routes
-Route::prefix('frontend')->group(function(){
+Route::prefix('frontend')->group(function () {
     // Route::get('/index',[CategotyFrontendController::class, 'index']);
-    Route::get('/allproductinsubcategory/{id}', [ProductFrontendController::class, 'singleCategory'])->name('single.categories');
+    Route::get('/products', [ProductFrontendController::class, 'index'])->name('products.front.index');
+    Route::get('/products/subcategory/{id}', [ProductFrontendController::class, 'filterBySubcategory'])->name('products.subcategory');
 });
 
-Route::get('/',[CategotyFrontendController::class, 'index'])->name('home');
+Route::get('/', [CategotyFrontendController::class, 'index'])->name('home');
 
 Route::get('/reg', function () {
     return view('frontend.auth.register');
@@ -103,8 +97,8 @@ Route::get('/res', function () {
     return view('frontend.auth.reset');
 });
 
-Route::get('/frontend/addtocart/{id}',[CartController::class, 'addToCart'])->name('frontend.add.to.cart');
-Route::get('/cart',[CartController::class, 'cart'])->name('cart');
+Route::get('/frontend/addtocart/{id}', [CartController::class, 'addToCart'])->name('frontend.add.to.cart');
+Route::get('/cart', [CartController::class, 'cart'])->name('cart');
 Route::put('/cart/{product}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
@@ -112,6 +106,9 @@ Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remov
 
 
 
-Route::get('/checkout', function(){
-return view('frontend.pages.shop-checkout');
-});
+Route::get('/checkout', function () {
+    return view('frontend.pages.shop-checkout');
+})->name('cart.checkout');
+
+Route::post('/order', [CartController::class, 'order'])->name('order.post');
+

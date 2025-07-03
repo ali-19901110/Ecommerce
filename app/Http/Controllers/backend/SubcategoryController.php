@@ -46,7 +46,7 @@ class SubcategoryController extends Controller
         // Insert to DB
         try {
             //dd('test');
-             Subcategory::create([
+            Subcategory::create([
                 'name' => $request->name,
                 'category_id' => $request->category_id,
                 'slug' => $request->slug,
@@ -102,7 +102,9 @@ class SubcategoryController extends Controller
         }
     }
 
-     public function destroy(Subcategory $subcategory){
+    public function destroy(Subcategory $subcategory)
+    {
+        $subcategory->products()->delete();
         $subcategory->delete();
         return redirect()->route('subcategories.index');
     }

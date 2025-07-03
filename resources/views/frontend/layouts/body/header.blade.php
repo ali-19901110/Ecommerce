@@ -137,8 +137,17 @@
                                                 <h4><a href="shop-product-right.html">{{$value["name"]}}</a></h4>
                                                 <h4><span>{{$value['quantity']}} × </span>${{$value['price']}}</h4>
                                             </div>
+
                                             <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                                <form action="{{route('cart.remove',$value['id'])}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"  style="border: none; background: none; padding: 0; outline: none; box-shadow: none;"
+                                                        class="text-body">
+                                                        <i class="fi-rs-cross-small"></i>
+                                                    </button>
+                                                </form>
+                                                {{-- <a href="#"><i class="fi-rs-cross-small"></i></a> --}}
                                             </div>
                                         </li>
                                         @endforeach
@@ -150,12 +159,12 @@
                                         </div>
                                         <div class="shopping-cart-button">
                                             <a href="{{route('cart')}}" class="outline">View cart</a>
-                                            <a href="shop-checkout.html">Checkout</a>
+                                            <a href="{{route('cart.checkout')}}">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                          
+
                             <div class="header-action-icon-2">
                                 <a href="page-account.html">
                                     <img class="svgInject" alt="Nest"
@@ -198,7 +207,7 @@
                                     </ul>
                                 </div>
                             </div>
-                              @endauth
+                            @endauth
                         </div>
                     </div>
                 </div>

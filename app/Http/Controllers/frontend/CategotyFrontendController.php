@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class CategotyFrontendController extends Controller
 {
+   
     public function index()
     {
         $subProducts = collect();
