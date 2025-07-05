@@ -3,9 +3,11 @@
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\SubcategoryController;
+use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\CategotyFrontendController;
 use App\Http\Controllers\frontend\ProductFrontendController;
+use App\Http\Controllers\frontend\UserController as FrontendUserController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Category;
 use App\Models\Subcategory;
@@ -42,9 +44,7 @@ require __DIR__ . '/auth.php';
 //     return view('admin');
 // })->middleware(['auth', 'role:user']);
 
-Route::get('/master', function () {
-    return view('backend.layout.master');
-});
+
 
 
 //Routes of category
@@ -83,6 +83,14 @@ Route::prefix('frontend')->group(function () {
     // Route::get('/index',[CategotyFrontendController::class, 'index']);
     Route::get('/products', [ProductFrontendController::class, 'index'])->name('products.front.index');
     Route::get('/products/subcategory/{id}', [ProductFrontendController::class, 'filterBySubcategory'])->name('products.subcategory');
+    //cart routes
+    Route::get('/addtocart/{id}', [CartController::class, 'addToCart'])->name('frontend.add.to.cart');
+    Route::get('/cart', [CartController::class, 'cart'])->name('cart');
+    Route::put('/cart/{product}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
+    //Acoount Route
+    Route::get('/users/account', [FrontendUserController::class, 'index'])->name('users.account');
+    Route::post('/my-account/update', [FrontendUserController::class, 'update'])->name('account.update');
 });
 
 Route::get('/', [CategotyFrontendController::class, 'index'])->name('home');
@@ -97,10 +105,7 @@ Route::get('/res', function () {
     return view('frontend.auth.reset');
 });
 
-Route::get('/frontend/addtocart/{id}', [CartController::class, 'addToCart'])->name('frontend.add.to.cart');
-Route::get('/cart', [CartController::class, 'cart'])->name('cart');
-Route::put('/cart/{product}', [CartController::class, 'update'])->name('cart.update');
-Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
 
 
 
@@ -111,4 +116,3 @@ Route::get('/checkout', function () {
 })->name('cart.checkout');
 
 Route::post('/order', [CartController::class, 'order'])->name('order.post');
-

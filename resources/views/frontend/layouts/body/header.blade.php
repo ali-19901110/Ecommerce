@@ -166,19 +166,19 @@
                             </div>
 
                             <div class="header-action-icon-2">
-                                <a href="page-account.html">
+                                <a href="{{route('users.account')}}">
                                     <img class="svgInject" alt="Nest"
                                         src="{{ asset('frontend/assets/imgs/theme/icons/icon-user.svg') }}" />
                                 </a>
-                                <a href="page-account.html"><span class="lable ml-0">Account</span></a>
+                                <a href="{{route('users.account')}}"><span class="lable ml-0">Account</span></a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                     <ul>
                                         <li>
-                                            <a href="page-account.html"><i class="fi fi-rs-user mr-10"></i>My
+                                            <a href="{{route('users.account')}}"><i class="fi fi-rs-user mr-10"></i>My
                                                 Account</a>
                                         </li>
                                         <li>
-                                            <a href="page-account.html"><i class="fi fi-rs-location-alt mr-10"></i>Order
+                                            <a href="{{route('users.account')}}"><i class="fi fi-rs-location-alt mr-10"></i>Order
                                                 Tracking</a>
                                         </li>
                                         <li>

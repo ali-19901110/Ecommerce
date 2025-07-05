@@ -220,7 +220,7 @@
                 const productId = this.dataset.id;
                 const quantity = this.dataset.quantity;
 
-                fetch(`{{ url('/cart') }}/${productId}`, {
+                fetch(`{{ url('/frontend/cart') }}/${productId}`, {
                     method: 'POST',
                     headers: {
                         'X-CSRF-TOKEN': '{{ csrf_token() }}',
