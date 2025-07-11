@@ -30,8 +30,8 @@
   <!-- End Header  -->
 
   <main class="main">
-  
-    
+
+
     @yield('main')
 
 
@@ -48,6 +48,8 @@
 
 
   <!-- Vendor JS-->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  @stack('scripts')
   <script src="{{ asset('frontend/assets/js/vendor/modernizr-3.6.0.min.js') }}"></script>
   <script src="{{ asset('frontend/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
   <script src="{{ asset('frontend/assets/js/vendor/jquery-migrate-3.3.0.min.js') }}"></script>
@@ -70,6 +72,8 @@
   <!-- Template  JS -->
   <script src="{{ asset('frontend/assets/js/main.js?v=5.3') }}"></script>
   <script src="{{ asset('frontend/assets/js/shop.js?v=5.3') }}"></script>
-   @yield('script')
+  @yield('script')
+  <!-- layouts/app.blade.php -->
 </body>
+
 </html>

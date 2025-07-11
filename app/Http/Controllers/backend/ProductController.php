@@ -7,10 +7,12 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Subcategory;
 use Carbon\Carbon;
+use Dotenv\Exception\ValidationException;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use PgSql\Lob;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -39,7 +41,7 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'dimensions' => 'nullable|string|max:255',
-            'slug' => 'required|string|max:255|unique:subcategories,slug',
+            // 'slug' => 'required|string|max:255|unique:subcategories,slug',
             'price' => 'required|numeric|min:0|max:99999999.99',
             'sku' => 'required|string|max:100|unique:products,sku',
             'is_active' => 'nullable|boolean',
@@ -67,15 +69,16 @@ class ProductController extends Controller
 
             // Validation Form
             //dd('test');
+            // dd(Str::slug($request->name, '_'));
             $obj = Product::create([
                 'name' => $request->name,
                 'dimensions' => $request->dimensions,
-                'slug' => $request->slug,
+                'slug' => Str::slug($request->name, '_'),
                 'price' => $request->price,
                 'sku' => $request->sku,
                 'is_active' => $request->is_active,
                 'is_featured' => $request->is_featured,
-                'manage_stock' => $request->has('manage_stock')?? 0,
+                'manage_stock' => $request->has('manage_stock') ?? 0,
                 'stock_status' => $request->stock_status,
                 'sale_price' =>  $request->sale_price,
                 'cost_price' =>  $request->cost_price,
@@ -106,42 +109,59 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-         $allcategories = Category::with('products')->get();
+        $allcategories = Category::with('products')->get();
         //dd($allcategories);
         $allsubcategories = Subcategory::with('products')->get();
-        return view('backend.pages.product.edit', compact('allsubcategories', 'allcategories','product'));
+        return view('backend.pages.product.edit', compact('allsubcategories', 'allcategories', 'product'));
     }
-    
-    // public function update(Request $request, Subcategory $subcategory)
-    // {
-    //     // dd($category);
 
-    //     // Validation Form
-    //     try {
-    //         $validated =  $request->validate([
-    //             'name' => 'required|string|max:255',
-    //             'category_id' => 'required|integer|exists:categories,id',
-    //             'slug' => (string)'required|string|max:255|unique:categories,slug,' . $subcategory->id,
-    //             'description' => 'nullable|string',
-    //             'image' => 'nullable|string',
-    //             'is_active' => 'required|boolean',
-    //             'sort_order' => 'integer|min:0',
-    //             'meta_title' => 'nullable|string|max:255',
-    //             'meta_description' => 'nullable|string|max:500'
-    //         ]);
-    //         $subcategory->update($validated);
-    //         return redirect()->route('subcategories.index')->with('success', 'Updated!');
-    //     } catch (ValidationException $e) {
-    //         throw $e;
-    //     } catch (Exception $e) {
-    //         //return redirect()->back()->with('error', 'Failed!');
-    //         return redirect()->back()
-    //             ->withInput()
-    //             ->with('error', 'Something went wrong while updating the category.');
-    //     }
-    // }
+    public function update(Request $request, Subcategory $subcategory)
+    {
+        // dd($category);
 
-     public function destroy(Product $product){
+        // Validation Form
+        try {
+            $validated =  $request->validate([
+                'name' => 'required|string|max:255',
+                'dimensions' => 'nullable|string|max:255',
+                // 'slug' => 'required|string|max:255|unique:subcategories,slug',
+                'price' => 'required|numeric|min:0|max:99999999.99',
+                'sku' => 'required|string|max:100|unique:products,sku',
+                'is_active' => 'nullable|boolean',
+                'is_featured' => 'nullable|boolean',
+                'manage_stock' => 'nullable|boolean',
+                'stock_status' => 'required|in:in_stock,out_of_stock,on_backorder',
+                'sale_price' => 'nullable|numeric|min:0|max:99999999.99',
+                'cost_price' => 'nullable|numeric|min:0|max:99999999.99',
+                'stock_quantity' => 'required|integer|min:0',
+                'min_quantity' => 'required|integer|min:1',
+                //  'sort_order' => 'integer|min:0',
+                'image' => 'nullable|string',
+                'weight' => 'nullable|numeric|min:0|max:999999.99',
+                'gallery' => 'nullable|array',
+                'meta_title' => 'nullable|string|max:255',
+                'meta_description' => 'nullable|string',
+                'description' => 'nullable|string',
+                'rating_average' => 'required|numeric|min:0|max:5',
+                'rating_count' => 'required|integer|min:0',
+                'category_id' => 'required|exists:categories,id',
+                'subcategory_id' => 'required|exists:subcategories,id',
+                'short_description' => 'nullable|string'
+            ]);
+            $subcategory->update($validated);
+            return redirect()->route('products.index')->with('success', 'Updated!');
+        } catch (ValidationException $e) {
+            throw $e;
+        } catch (Exception $e) {
+            //return redirect()->back()->with('error', 'Failed!');
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Something went wrong while updating the category.');
+        }
+    }
+
+    public function destroy(Product $product)
+    {
         $product->delete();
         return redirect()->route('products.index');
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\ShoppingCart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,11 +13,12 @@ class CartController extends Controller
     public function addToCart($id)
     {
         // dd($id);
-        if(!Auth::check()){
+        if (!Auth::check()) {
             return redirect()->route('frontend.login')->with('error', 'You must be logged in');
         }
 
         $product = Product::findOrFail($id);
+        //dd($product->price);
         // Define session if empty return the empty record
         $cart = session('cart', []);
         if (isset($cart[$id])) {
@@ -33,9 +35,27 @@ class CartController extends Controller
         }
 
         session()->put("cart", $cart);
-        //dd($cart);
-        // return view('frontend.pages.shop-cart');
-        return redirect()->back();
+        
+        // Store in database
+        if(Auth::check()){
+            $userId = Auth::id();
+            $existing = ShoppingCart::where('user_id', $userId)->where('product_id', $id)->first();
+            if($existing){
+                $existing->increment('quantity');
+                $existing->update([
+                    'price' => $existing->quantity * $existing->price
+                ]);
+            }else{
+                ShoppingCart::create([
+                    'user_id' => $userId,
+                    'product_id' => $id,
+                    'quantity' => 1,
+                    'price' => $product->price,
+                    'total' => $product->price 
+                ]);
+            }
+        }
+       return redirect()->back()->with('success', 'Product added to cart!');
     }
 
     public function cart()
@@ -55,13 +75,13 @@ class CartController extends Controller
         return response()->json(['success' => true, 'cart' => $cart]);
     }
 
-    public function remove($id){
+    public function remove($id)
+    {
         $cart = session()->get('cart', []);
-        if(isset($cart[$id])){
+        if (isset($cart[$id])) {
             unset($cart[$id]);
             session()->put('cart', $cart);
         }
         return redirect()->route('cart');
-
     }
 }

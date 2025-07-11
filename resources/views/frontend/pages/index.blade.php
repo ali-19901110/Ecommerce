@@ -7,7 +7,7 @@
 
 $Categories = App\Models\Category::all();
 if (!isset($products)) {
-    $products = \App\Models\Product::all();
+$products = \App\Models\Product::all();
 }
 $subcategries = App\Models\SubCategory::all();
 @endphp
@@ -132,7 +132,7 @@ $subcategries = App\Models\SubCategory::all();
             <h3> New Products </h3>
             <ul class="nav nav-tabs links" id="myTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <a href="{{route('products.front.index')}}" class="nav-link active" >
+                    <a href="{{route('products.front.index')}}" class="nav-link active">
                         All
                     </a>
                 </li>
@@ -215,4 +215,16 @@ $subcategries = App\Models\SubCategory::all();
 </section>
 <!--Products Tabs-->
 
+@push('scripts')
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: @json(session('success')),
+        timer: 3000,
+        showConfirmButton: false,
+        timerProgressBar: true
+    });
+</script>
+@endpush
 @endsection

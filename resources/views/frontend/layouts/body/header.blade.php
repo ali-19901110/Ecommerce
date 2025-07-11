@@ -8,7 +8,6 @@
                 <div class="col-xl-3 col-lg-4">
                     <div class="header-info">
                         <ul>
-
                             <li><a href="{{route('cart')}}">My Cart</a></li>
                             <li><a href="shop-wishlist.html">Checkout</a></li>
                             <li><a href="shop-order.html">Order Tracking</a></li>
@@ -142,7 +141,8 @@
                                                 <form action="{{route('cart.remove',$value['id'])}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit"  style="border: none; background: none; padding: 0; outline: none; box-shadow: none;"
+                                                    <button type="submit"
+                                                        style="border: none; background: none; padding: 0; outline: none; box-shadow: none;"
                                                         class="text-body">
                                                         <i class="fi-rs-cross-small"></i>
                                                     </button>
@@ -178,7 +178,8 @@
                                                 Account</a>
                                         </li>
                                         <li>
-                                            <a href="{{route('users.account')}}"><i class="fi fi-rs-location-alt mr-10"></i>Order
+                                            <a href="{{route('users.account')}}"><i
+                                                    class="fi fi-rs-location-alt mr-10"></i>Order
                                                 Tracking</a>
                                         </li>
                                         <li>
