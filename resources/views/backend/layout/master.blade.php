@@ -23,6 +23,8 @@
 	<link rel="stylesheet" href="{{asset('backend/assets/css/dark-theme.css')}}" />
 	<link rel="stylesheet" href="{{asset('backend/assets/css/semi-dark.css')}}" />
 	<link rel="stylesheet" href="{{asset('backend/assets/css/header-colors.css')}}" />
+	{{-- yajra css --}}
+	<link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.min.css">
 	<title>Rukada - Responsive Bootstrap 5 Admin Template</title>
 </head>
 
@@ -370,6 +372,10 @@
 		</div>
 	</div>
 	<!--end switcher-->
+	{{-- jquery --}}
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-3gJwYp4Zp8a9kaFhks3U9gT8SO1kzT6xvG3NqPaAC0c=" crossorigin="anonymous"></script>
+	{{-- ajax --}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<!-- Bootstrap JS -->
 	<script src="{{asset('backend/assets/js/bootstrap.bundle.min.js')}}"></script>
 	<!--plugins-->
@@ -392,6 +398,9 @@
 	<script src="{{asset('backend/assets/js/index.js')}}"></script>
 	<!--app JS-->
 	<script src="{{asset('backend/assets/js/app.js')}}"></script>
+	{{-- yajra js --}}
+	<script src="https:////cdn.datatables.net/2.3.2/js/dataTables.min.js"></script>
+	@stack("scripts")
 </body>
 
 </html>

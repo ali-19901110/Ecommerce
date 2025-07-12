@@ -35,8 +35,8 @@ return new class extends Migration
             $table->text('meta_description')->nullable();
             $table->decimal('rating_average', 2, 1)->default(0.0);
             $table->integer('rating_count')->default(0);
-            $table->foreignId('category_id')->constrained();
-            $table->foreignId('subcategory_id')->constrained();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('subcategory_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

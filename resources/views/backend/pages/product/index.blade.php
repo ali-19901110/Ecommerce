@@ -67,3 +67,6 @@
 
 
 @endsection
+@push
+<script src="{{asset('backend\pages\product.js')}}"></script>
+@endpush
