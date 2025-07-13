@@ -12,8 +12,9 @@
                     <h5 class="mb-0 text-primary">Update Product</h5>
                 </div>
                 <hr>
-                <form class="row g-3" method="POST" action="{{route('products.store')}}">
+                <form class="row g-3" method="POST" action="{{route('products.update', $product->id)}}">
                     @csrf
+                    @method('PUT')
                     <div class="col-md-6">
                         <label for="inputName" class="form-label">Product Name</label>
                         <input type="text" name="name" class="form-control" id="inputName" value="{{$product->name}}">
@@ -61,7 +62,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="Sku" class="form-label"> Sku</label>
-                        <input type="text" class="form-control" id="Sku" name="sku" value="{{old('sku')}}">
+                        <input type="text" class="form-control" id="Sku" name="sku" value="{{ old('sku', $product->sku) }}">
                         @error('sku')
                         <p style="color: #f00">{{$message}}</p>
                         @enderror
@@ -233,7 +234,7 @@
 
 
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary px-5">Register</button>
+                        <button type="submit" class="btn btn-primary px-5">Update</button>
                     </div>
                 </form>
             </div>

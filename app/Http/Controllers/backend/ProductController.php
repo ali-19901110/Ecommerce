@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\backend;
-
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 use PgSql\Lob;
 use Illuminate\Support\Str;
 
+
 class ProductController extends Controller
 {
     public function index()
@@ -25,15 +26,12 @@ class ProductController extends Controller
     public function create()
     {
         $allcategories = Category::with('products')->get();
-        //dd($allcategories);
         $allsubcategories = Subcategory::with('products')->get();
-        // dd($allcategories);
         return view('backend.pages.product.create', compact('allcategories', 'allsubcategories'));
     }
 
     public function store(Request $request)
     {
-        //dd($request->has('manage_stock'));
         $request->merge([
             'manage_stock' => $request->has('manage_stock')
         ]);
@@ -98,7 +96,6 @@ class ProductController extends Controller
                 'short_description' => $request->short_description,
 
             ]);
-            // dd($obj);
         } catch (Exception $e) {
             //dd('Error: ' . $e->getMessage());
             Log::error('Error creating category: ' . $e->getMessage());
@@ -115,18 +112,32 @@ class ProductController extends Controller
         return view('backend.pages.product.edit', compact('allsubcategories', 'allcategories', 'product'));
     }
 
-    public function update(Request $request, Subcategory $subcategory)
+    public function update(Request $request, Product $product)
     {
         // dd($category);
 
         // Validation Form
         try {
-            $validated =  $request->validate([
+            $validated = $request->validate([
                 'name' => 'required|string|max:255',
                 'dimensions' => 'nullable|string|max:255',
-                // 'slug' => 'required|string|max:255|unique:subcategories,slug',
-                'price' => 'required|numeric|min:0|max:99999999.99',
-                'sku' => 'required|string|max:100|unique:products,sku',
+
+                // FIXED SLUG VALIDATION
+                'slug' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('products', 'slug')->ignore($product->id),
+                ],
+
+                // FIXED SKU VALIDATION
+                'sku' => [
+                    'required',
+                    'string',
+                    'max:100',
+                    Rule::unique('products', 'sku')->ignore($product->id),
+                ],
+
                 'is_active' => 'nullable|boolean',
                 'is_featured' => 'nullable|boolean',
                 'manage_stock' => 'nullable|boolean',
@@ -135,7 +146,6 @@ class ProductController extends Controller
                 'cost_price' => 'nullable|numeric|min:0|max:99999999.99',
                 'stock_quantity' => 'required|integer|min:0',
                 'min_quantity' => 'required|integer|min:1',
-                //  'sort_order' => 'integer|min:0',
                 'image' => 'nullable|string',
                 'weight' => 'nullable|numeric|min:0|max:999999.99',
                 'gallery' => 'nullable|array',
@@ -148,7 +158,7 @@ class ProductController extends Controller
                 'subcategory_id' => 'required|exists:subcategories,id',
                 'short_description' => 'nullable|string'
             ]);
-            $subcategory->update($validated);
+            $product->update($validated);
             return redirect()->route('products.index')->with('success', 'Updated!');
         } catch (ValidationException $e) {
             throw $e;

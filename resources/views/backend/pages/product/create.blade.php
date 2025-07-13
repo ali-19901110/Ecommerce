@@ -238,5 +238,9 @@
         </div>
     </div>
 </div>
-
+  <canvas id="chart1"></canvas>
+ <canvas id="chart2"></canvas>
+ <canvas id="chart3"></canvas>
+ <canvas id="chart4"></canvas>
+ <canvas id="chart5"></canvas>
 @endsection
