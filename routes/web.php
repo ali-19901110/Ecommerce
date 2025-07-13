@@ -76,7 +76,7 @@ Route::prefix('admin')->group(function () {
     });
 
     Route::get('login', function(){
-        
+        return view('backend.auth.auth-signin');
     });
 });
 

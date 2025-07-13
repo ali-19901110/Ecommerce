@@ -29,6 +29,23 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        $role = $request->input('role');
+
+    // Optional: force login to fail if role doesn't match the user
+    if ($role === 'admin' && !auth()->user()->hasRole('admin')) {
+        Auth::logout();
+        return redirect()->back()->withErrors([
+            'email' => 'You are not authorized to login as admin.',
+        ]);
+    }
+
+    if ($role === 'user' && auth()->user()->hasRole('admin')) {
+        Auth::logout();
+        return redirect()->back()->withErrors([
+            'email' => 'Admins must login through the admin login form.',
+        ]);
+    }
+
         // return redirect()->intended(RouteServiceProvider::HOME);
         // return redirect('frontend/index');
         //[changing] checking if user or admin by laratrust

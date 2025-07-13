@@ -27,6 +27,7 @@
                                 </div>
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
+                                     <input type="hidden" name="role" value="user">
                                     <x-input-label for="email" :value="__('Email')" />
                                     <div class="form-group">
                                         <input type="email" id="email" required class="block mt-1 w-full" name="email"
