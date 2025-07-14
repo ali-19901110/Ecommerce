@@ -40,11 +40,6 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__ . '/auth.php';
 
-// Route::get('/admin', function () {
-//     return view('admin');
-// })->middleware(['auth', 'role:user']);
-
-
 
 
 //Routes of category
@@ -75,8 +70,12 @@ Route::prefix('admin')->group(function () {
         Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     });
 
-    Route::get('login', function(){
+    Route::get('login', function () {
         return view('backend.auth.auth-signin');
+    });
+
+    Route::get('/master', function(){
+        return view('backend.layout.master');
     });
 });
 
@@ -85,7 +84,7 @@ Route::prefix('admin')->group(function () {
 
 
 //frontend routes
-Route::prefix('frontend')->group(function () {
+Route::prefix('frontend')->middleware(['auth', 'role:user'])->group(function () {
     // Route::get('/index',[CategotyFrontendController::class, 'index']);
     Route::get('/products', [ProductFrontendController::class, 'index'])->name('products.front.index');
     Route::get('/products/subcategory/{id}', [ProductFrontendController::class, 'filterBySubcategory'])->name('products.subcategory');
@@ -96,13 +95,10 @@ Route::prefix('frontend')->group(function () {
     Route::put('/cart/{product}', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
-    
+
     //Acoount Route
     Route::get('/users/account', [FrontendUserController::class, 'index'])->name('users.account');
     Route::post('/my-account/update', [FrontendUserController::class, 'update'])->name('account.update');
-
-    //Error page 
-    // Route::get()
 });
 
 Route::get('/', [CategotyFrontendController::class, 'index'])->name('home');
