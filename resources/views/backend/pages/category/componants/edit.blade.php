@@ -14,23 +14,17 @@
                     <div class="col-md-6">
                         <label for="inputName" class="form-label">Category Name</label>
                         <input type="text" name="name" class="form-control" id="inputName" value="">
-                        @error('name')
-                        <p style="color: red;">{{ $message }}</p>
-                        @enderror
+                        <div class="invalid-feedback"></div>
                     </div>
                     <div class="col-md-6">
                         <label for="inputSlug" class="form-label">Slug</label>
                         <input type="text" class="form-control" id="inputSlug" name="slug" value="">
-                        @error('slug')
-                        <p style="color: red;">{{ $message }}</p>
-                        @enderror
+                        <div class="invalid-feedback"></div>
                     </div>
                     <div class="col-md-6">
                         <label for="desc" class="form-label">Description</label>
                         <input type="text" name="description" class="form-control" id="desc" value="">
-                        @error('Description')
-                        <p style="color: #f00">{{$message}}</p>
-                        @enderror
+                        <div class="invalid-feedback"></div>
                     </div>
                     <div class="col-md-6">
                         <label for="image" class="form-label"> Image</label>
@@ -51,27 +45,23 @@
                                 old('is_active', $category->is_active ?? 1) == 0 ? 'checked' : '' }}>
                             <label class="form-check-label" for="inactive">Inactive</label>
                         </div>
-                        @error('is_active')
-                        <p style="color: #f00">{{$message}}</p>
-                        @enderror
+                        <div class="invalid-feedback"></div>
                     </div>
                     <div class="mb-3">
                         <label for="sort_order" class="form-label">Display Order</label>
                         <input type="number" name="sort_order" id="sort_order" class="form-control" value="" min="0"
                             step="1">
+                        <div class="invalid-feedback"></div>
                     </div>
                     <div class="col-12">
                         <label for="meta_title" class="form-label">Meta Title</label>
                         <input type="text" name="meta_title" class="form-control" id="meta_title" value="">
+                        <div class="invalid-feedback"></div>
                     </div>
                     <div class="col-12">
                         <label for="inputAddress" class="form-label">Meta Description</label>
                         <textarea class="form-control" id="inputAddress" name="meta_description" rows="3"></textarea>
                     </div>
-                    {{-- <div class="col-12">
-                        <button type="submit" class="btn btn-primary px-5">Update</button>
-                    </div> --}}
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
