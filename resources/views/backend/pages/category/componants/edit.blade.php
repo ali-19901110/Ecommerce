@@ -1,53 +1,40 @@
-@extends('backend.layout.master')
-@if ($errors->any())
-<pre>{{ print_r($errors->messages(), true) }}</pre>
-@endif
-@section('content')
-@if (session('error'))
-<div class="alert alert-danger">
-    {{ session('error') }}
-</div>
-@endif
-<div class="row">
-    <div class="col-xl-7 mx-auto">
-        <div class="card border-top  border-primary">
-            <div class="card-body p-5">
-                <div class="card-title d-flex align-items-center">
-                    <div><i class="bx bx-file-plus me-1 font-50 text-primary"></i>
-                    </div>
-                    <h5 class="mb-0 text-primary">Edit Category</h5>
-                </div>
-                <hr>
-                {{-- @dd($category) --}}
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="editModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
                 <form class="row g-3" id="editCategoryForm">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" id="edit_category_id" value="{{ $category->id }}">
+                    <input type="hidden" id="edit_category_id" value="">
                     <div class="col-md-6">
                         <label for="inputName" class="form-label">Category Name</label>
-                        <input type="text" name="name" class="form-control" id="inputName" value="{{$category->name}}">
+                        <input type="text" name="name" class="form-control" id="inputName" value="">
                         @error('name')
                         <p style="color: red;">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="inputLastName" class="form-label">Slug</label>
-                        <input type="text" class="form-control" id="slug" name="slug" value="{{$category->slug}}">
+                        <label for="inputSlug" class="form-label">Slug</label>
+                        <input type="text" class="form-control" id="inputSlug" name="slug" value="">
                         @error('slug')
                         <p style="color: red;">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="col-md-6">
                         <label for="desc" class="form-label">Description</label>
-                        <input type="text" name="description" class="form-control" id="desc"
-                            value="{{$category->description}}">
+                        <input type="text" name="description" class="form-control" id="desc" value="">
                         @error('Description')
                         <p style="color: #f00">{{$message}}</p>
                         @enderror
                     </div>
                     <div class="col-md-6">
                         <label for="image" class="form-label"> Image</label>
-                        <input type="text" class="form-control" id="image" name="image" value="{{$category->image}}">
+                        <input type="text" class="form-control" id="image" name="image" value="">
                         @error('image')
                         <p style="color: #f00">{{$message}}</p>
                         @enderror
@@ -70,29 +57,27 @@
                     </div>
                     <div class="mb-3">
                         <label for="sort_order" class="form-label">Display Order</label>
-                        <input type="number" name="sort_order" id="sort_order" class="form-control"
-                            value="{{ old('sort_order', $category->sort_order ?? 0) }}" min="0" step="1">
+                        <input type="number" name="sort_order" id="sort_order" class="form-control" value="" min="0"
+                            step="1">
                     </div>
                     <div class="col-12">
-                        <label for="inputAddress" class="form-label">Meta Title</label>
-                        <input type="text" name="meta_title" class="form-control" id="inputName"
-                            value="{{$category->meta_title}}">
+                        <label for="meta_title" class="form-label">Meta Title</label>
+                        <input type="text" name="meta_title" class="form-control" id="meta_title" value="">
                     </div>
                     <div class="col-12">
-                        <label for="inputAddress2" class="form-label">Meta Description</label>
-                        <textarea class="form-control" id="inputAddress2" name="meta_description"
-                            rows="3">{{$category->meta_description}}</textarea>
+                        <label for="inputAddress" class="form-label">Meta Description</label>
+                        <textarea class="form-control" id="inputAddress" name="meta_description" rows="3"></textarea>
                     </div>
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <button type="submit" class="btn btn-primary px-5">Update</button>
-                    </div>
-                </form>
+                    </div> --}}
+
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
         </div>
     </div>
 </div>
-
-@endsection
-{{-- @push('scripts')
-<script src="{{asset('backend/pages/category.js')}}"></script>
-@endpush --}}

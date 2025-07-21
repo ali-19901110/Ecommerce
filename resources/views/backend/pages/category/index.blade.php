@@ -1,7 +1,6 @@
 @extends('backend.layout.master')
 
 @section('content')
-
 <div class="card radius-10">
     <div class="card-body">
         <div class="d-flex align-items-center">
@@ -13,19 +12,18 @@
         </div>
         <hr>
         <div class="table-responsive">
-            <table class="table align-middle mb-0">
+            {{$dataTable->table(['class' => 'table table-bordered nowrap w-100'], true)}}
+            {{-- <table class="table align-middle mb-0" id="category_table">
                 <thead class="table-light">
                     <tr>
                         <th>Category id</th>
                         <th>Category</th>
                         <th>Slug</th>
                         <th>Date</th>
-                        {{-- <th>Price</th>
-                        <th>Status</th> --}}
                         <th>Action</th>
                     </tr>
-                </thead>
-                <tbody>
+                </thead> --}}
+                {{-- <tbody>
                     @foreach ($categoriesFromDB as $category)
 
                     <tr>
@@ -50,21 +48,21 @@
                                     <button type="submit" class="btn bg-light" data-bs-toggle="tooltip"
                                         data-bs-placement="top" title="Delete"><i class="bx bx-trash"></i></button>
                                 </form>
-                                {{-- <form action="">
-                                    <button class=""><i class="bx bx-trash" data-bs-toggle="tooltip"
-                                            data-bs-placement="top" title="Delete"></i></button>
-                                </form> --}}
                                 <a href="{{route('categories.edit', $category->id)}}" class="ms-4"><i class="bx bx-cog"
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
                             </div>
                         </td>
                     </tr>
                     @endforeach
-                </tbody>
-            </table>
+                </tbody> --}}
+            {{-- </table> --}}
         </div>
     </div>
 </div>
-
-
+@include('backend.pages.category.componants.create')
+@include('backend.pages.category.componants.edit')
 @endsection
+@push('scripts')
+{{$dataTable->scripts(attributes: ['type'=> 'module'])}}
+<script src="{{asset('backend/pages/category.js')}}"></script>
+@endpush

@@ -12,7 +12,8 @@
                     <h5 class="mb-0 text-primary">Create Category</h5>
                 </div>
                 <hr>
-                <form class="row g-3" method="POST" action="{{route('categories.store')}}">
+               
+                <form class="row g-3" id="create-category-form">
                     @csrf
                     <div class="col-md-6">
                         <label for="inputName" class="form-label">Category Name</label>
@@ -46,12 +47,14 @@
                         <label>Status:</label><br>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="is_active" id="active" value="1" {{
-                                old('is_active', $category->is_active ?? 1) == 1 ? 'checked' : '' }}>
+                                old('is_active', $category->is_active ?? 1) == 1 ?
+                            'checked' : '' }}>
                             <label class="form-check-label" for="active">Active</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="is_active" id="inactive" value="0" {{
-                                old('is_active', $category->is_active ?? 1) == 0 ? 'checked' : '' }}>
+                                old('is_active', $category->is_active ?? 1) == 0 ?
+                            'checked' : '' }}>
                             <label class="form-check-label" for="inactive">Inactive</label>
                         </div>
                         @error('is_active')
@@ -77,9 +80,16 @@
                         <button type="submit" class="btn btn-primary px-5">Register</button>
                     </div>
                 </form>
+               
+
+
             </div>
         </div>
     </div>
 </div>
 
 @endsection
+{{-- @push('scripts')
+<script src="{{asset('backend/pages/category.js')}}"></script>
+@endpush --}}
+           

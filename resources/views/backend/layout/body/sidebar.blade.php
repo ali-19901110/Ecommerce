@@ -18,7 +18,11 @@
                 <div class="menu-title">Category</div>
             </a>
             <ul>
-                <li> <a href="{{route('categories.create')}}"><i class="bx bx-right-arrow-alt"></i>Create Category</a>
+               
+                <li>
+                    <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+                        <i class="bx bx-right-arrow-alt"></i> Create Category
+                    </a>
                 </li>
             </ul>
         </li>
@@ -29,7 +33,8 @@
                 <div class="menu-title">SubCategory</div>
             </a>
             <ul>
-                <li> <a href="{{route('subcategories.create')}}"><i class="bx bx-right-arrow-alt"></i>create SubCategory</a>
+                <li> <a href="{{route('subcategories.create')}}"><i class="bx bx-right-arrow-alt"></i>create
+                        SubCategory</a>
                 </li>
             </ul>
         </li>

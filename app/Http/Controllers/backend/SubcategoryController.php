@@ -8,8 +8,10 @@ use App\Models\Subcategory;
 use Carbon\Carbon;
 use Dotenv\Exception\ValidationException;
 use Exception;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+
 
 class SubcategoryController extends Controller
 {
@@ -82,7 +84,12 @@ class SubcategoryController extends Controller
             $validated =  $request->validate([
                 'name' => 'required|string|max:255',
                 'category_id' => 'required|integer|exists:categories,id',
-                'slug' => (string)'required|string|max:255|unique:categories,slug,' . $subcategory->id,
+                'slug' => [
+                    'required',
+                    'string',
+                    'max:255',
+                    Rule::unique('subcategories', 'slug')->ignore($subcategory->id),
+                ],
                 'description' => 'nullable|string',
                 'image' => 'nullable|string',
                 'is_active' => 'required|boolean',
