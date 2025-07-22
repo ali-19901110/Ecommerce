@@ -29,11 +29,11 @@ class CategoryController extends Controller
     //     return view('backend.pages.category.create');
     // }
 
-    public function store(StoreCaegoryRequest $request)
+    public function store(StoreCaegoryRequest $storeCaegoryRequest)
     {
         try {
             DB::beginTransaction();
-            $data = $request->validated();
+            $data = $storeCaegoryRequest->validated();
             Category::create($data);
             DB::commit();
             return response()->json([
@@ -55,7 +55,11 @@ class CategoryController extends Controller
 
         return response()->json($category);
     }
-
+    public function getAllCategories()
+    {
+        $categories = Category::select('id', 'name')->orderBy('name')->get();
+        return response()->json($categories);
+    }
     public function update(UpdateCaegoryRequest $request,  Category $category)
     {
         try {

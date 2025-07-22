@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Category;
+use App\Models\Subcategory;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -12,7 +12,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CategoryDataTable extends DataTable
+class SubcategoryDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -22,9 +22,12 @@ class CategoryDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
+            ->addColumn('category.name', function ($subcategory) {
+                return $subcategory->category?->name ?? '-';
+            })
             ->addColumn('action', function ($row) {
-                return ' 
-                 <div class="d-flex gap-1">
+                return '
+                <div class="d-flex gap-1">
                 <button type="button" class="btn btn-danger btn-sm delete-btn" 
                  data-id="' . $row->id . '" 
                  data-name="' . e($row->name) . '">
@@ -36,18 +39,17 @@ class CategoryDataTable extends DataTable
                 Edit
                 </button>
               </div>
-           ';
-            })
-            ->rawColumns(['action'])
+                ';
+            })->rawColumns(['action'])
             ->setRowId('id');
     }
 
     /**
      * Get the query source of dataTable.
      */
-    public function query(Category $model): QueryBuilder
+    public function query(Subcategory $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()->with('category');
     }
 
     /**
@@ -56,7 +58,7 @@ class CategoryDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('category-table')
+            ->setTableId('subcategory-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->dom('Bfrtip')
@@ -85,6 +87,7 @@ class CategoryDataTable extends DataTable
             Column::make('name'),
             Column::make('slug'),
             Column::make('description'),
+            Column::make('category.name')->title('Category Name'),
             Column::make('created_at'),
             Column::make('updated_at'),
             Column::computed('action')
@@ -100,6 +103,6 @@ class CategoryDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'Category_' . date('YmdHis');
+        return 'Subcategory_' . date('YmdHis');
     }
 }

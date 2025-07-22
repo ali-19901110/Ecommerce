@@ -63,6 +63,7 @@ $(document).ready(function () {
         });
     });
 
+    // Delete category
     $(document).on("click", ".delete-btn", function () {
         const id = $(this).data("id");
         const name = $(this).data("name");

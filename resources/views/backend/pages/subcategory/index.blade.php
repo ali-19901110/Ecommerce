@@ -13,7 +13,8 @@
         </div>
         <hr>
         <div class="table-responsive">
-            <table class="table align-middle mb-0">
+            {{ $dataTable->table(['class' => 'table table-bordered nowrap w-100', 'id' => 'subcategory-table'], true) }}
+            {{-- <table class="table align-middle mb-0">
                 <thead class="table-light">
                     <tr>
                         <th>SubCategory id</th>
@@ -21,7 +22,6 @@
                         <th>Slug</th>
                         <th>category name</th>
                         <th>Date</th>
-                        {{-- <th>Price</th>--}}
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -59,10 +59,15 @@
                     </tr>
                     @endforeach
                 </tbody>
-            </table>
+            </table> --}}
         </div>
     </div>
 </div>
 
-
+@include('backend.pages.subcategory.componnants.create')
+@include('backend.pages.subcategory.componnants.edit')
 @endsection
+@push('scripts')
+{{$dataTable->scripts(attributes: ['type'=> 'module'])}}
+<script src="{{asset('backend/pages/subcategory.js')}}"></script>
+@endpush
