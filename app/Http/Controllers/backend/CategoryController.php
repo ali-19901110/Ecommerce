@@ -63,14 +63,17 @@ class CategoryController extends Controller
     public function update(UpdateCaegoryRequest $request,  Category $category)
     {
         try {
+            DB::beginTransaction();
             $validatedData = $request->validated(); // only validated data
             $category->update($validatedData);
-
+            DB::commit();
             return response()->json([
                 'message' => 'Category updated successfully',
                 'status' => 'success'
             ]);
         } catch (Exception $e) {
+            DB::rollBack();
+            Log::error('Create Category Failed: ' . $e->getMessage());
             return response()->json([
                 'message' => 'Failed to create category',
                 'error' => $e->getMessage(),

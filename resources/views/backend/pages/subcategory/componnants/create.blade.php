@@ -15,8 +15,9 @@
             <div class="invalid-feedback"></div>
           </div>
           <div class="col-md-4">
-            <label for="inputState" class="form-label">Category</label>
-            <select id="inputState" name="category_id" class="form-select">
+            <label for="edit_inputState" class="form-label">Category</label>
+            <select id="edit_inputState" name="category_id" class="form-select category-select" data-target="create">
+              {{-- <select class="form-select category-select" data-target="create"></select> --}}
               <option value="">-- Select Category --</option>
             </select>
           </div>
